@@ -1,0 +1,20 @@
+#importando o módulo socket, para que o python entenda os comandos que utilizarei. Importei ele, pois ele que se refere a conexões de rede.
+import socket
+#Solicitando que o usuário digite o endereço IP do alvo e alocando este valor na variável “host”
+host = input ("Digite o IP alvo ")
+#definindo o espaço amostral que contém todas as portas a serem escaneadas e alocando os valores na variável “portas”
+portas = range(0,1024)
+#utilizando o laço “for” para executar os comandos abaixo para cada valor de “porta” dentro de portas
+for porta in portas:
+#estabelecendo uma variável “client” que realiza uma conexão TCP/IP.
+    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#estabelecendo um tempo de espera da resposta da porta a ser escaneada, caso não haja nenhuma resposta neste intervalo de 0.1s, a porta está fechada
+    client.settimeout(0.1)
+#estabelecendo uma conexão e, criando uma variável “code” para receber um valor específico, caso a conexão entre o ip e a porta em questão seja estabelecida, o valor retornado é 0
+    code = client.connect_ex((host, porta))
+#caso o code seja 0, a porta estará aberta, caso o contrário a porta estará fechada.
+    if code == 0:
+        print ("Porta ",i," aberta")
+    else:
+        print ("porta ", i," fechada") 
+
